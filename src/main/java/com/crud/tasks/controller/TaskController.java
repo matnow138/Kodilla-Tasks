@@ -5,14 +5,11 @@ import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
 
-import com.crud.tasks.repository.TaskRepository;
 import com.crud.tasks.service.DbService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,8 +46,8 @@ public class TaskController {
 
     }
 
-    @PutMapping
-    public TaskDto updateTask(@RequestBody TaskDto taskDto){
+    @PutMapping(value ="{taskId}")
+    public TaskDto updateTask(@RequestBody @PathVariable Long taskId, TaskDto taskDto){
         return new TaskDto(1L, "Edited test title", "Test content");
     }
     @PostMapping
