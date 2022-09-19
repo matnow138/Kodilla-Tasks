@@ -14,11 +14,9 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static java.util.Optional.ofNullable;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -52,6 +50,7 @@ class TrelloClientTest {
         assertEquals("Kodilla", fetchedTrelloBoards.get(0).getName());
         assertEquals(new ArrayList<>(), fetchedTrelloBoards.get(0).getLists());
     }
+
     @Test
     public void shouldCreateCard() throws URISyntaxException {
         //Given
@@ -79,8 +78,9 @@ class TrelloClientTest {
         assertEquals("test task", newCard.getName());
         assertEquals("http://test.com", newCard.getShortUrl());
     }
+
     @Test
-    public void shouldReturnEmptyList() throws URISyntaxException{
+    public void shouldReturnEmptyList() throws URISyntaxException {
         //Given
         when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
         when(trelloConfig.getTrelloAppKey()).thenReturn("test");
@@ -95,6 +95,6 @@ class TrelloClientTest {
         when(restTemplate.getForObject(uri, TrelloBoardDto[].class)).thenReturn(null);
         List<TrelloBoardDto> fetchedTrelloBoards = trelloClient.getTrelloBoards();
         //Then
-        assertEquals(0,fetchedTrelloBoards.size());
+        assertEquals(0, fetchedTrelloBoards.size());
     }
 }
