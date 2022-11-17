@@ -33,7 +33,7 @@ class TrelloMapperTest {
     public void mapToBoardTest() throws URISyntaxException {
         //Given
         List<TrelloBoardDto> trelloBoardDtos = new ArrayList<>();
-        trelloBoardDtos.add(new TrelloBoardDto("Kodilla", "test_id", new ArrayList<>());
+        trelloBoardDtos.add(new TrelloBoardDto("Kodilla", "test_id", new ArrayList<>()));
 
         //When
         List<TrelloBoard> trelloBoard = trelloMapper.mapToBoard(trelloBoardDtos);
