@@ -25,8 +25,8 @@ public class TaskController {
 
     @Autowired
     private TaskMapper taskMapper;
-    @Autowired
-    private DbService service;
+
+    private final DbService service;
 
 
 
