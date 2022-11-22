@@ -8,6 +8,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
+
 //public class TasksApplication extends SpringBootServletInitializer {
 public class TasksApplication{
 	public static void main(String[] args) {

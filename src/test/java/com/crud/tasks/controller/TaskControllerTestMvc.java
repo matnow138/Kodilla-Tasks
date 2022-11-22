@@ -1,6 +1,5 @@
 package com.crud.tasks.controller;
 
-import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
 import com.google.gson.Gson;
 import org.hamcrest.Matchers;
@@ -17,9 +16,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
 
 @SpringJUnitWebConfig
 @WebMvcTest(TaskController.class)
@@ -34,21 +33,21 @@ class TaskControllerTestMvc {
     @Test
     void getTasks() throws Exception {
         //Given
-        List<TaskDto> taskDtoList = List.of(new TaskDto("Test title","test conent"));
+        List<TaskDto> taskDtoList = List.of(new TaskDto("Test title", "test conent"));
         when(taskController.getTasks()).thenReturn(ResponseEntity.ok().body(taskDtoList));
         //When & Then
         mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                            .get("/v1/tasks")
-                            .contentType(MediaType.APPLICATION_JSON))
+                                .get("/v1/tasks")
+                                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].title", Matchers.is("Test title")));
     }
 
     @Test
-    void searchTask() throws Exception{
+    void searchTask() throws Exception {
         //Given
-        TaskDto taskDto = new TaskDto("title","content");
+        TaskDto taskDto = new TaskDto("title", "content");
         when(taskController.searchTask(anyLong())).thenReturn(ResponseEntity.ok().body(taskDto));
 
         //When & Then
@@ -62,9 +61,9 @@ class TaskControllerTestMvc {
     }
 
     @Test
-    void getTask() throws Exception{
+    void getTask() throws Exception {
         //Given
-        TaskDto taskDto = new TaskDto("title","content");
+        TaskDto taskDto = new TaskDto("title", "content");
         when(taskController.getTask(anyLong())).thenReturn(ResponseEntity.ok().body(taskDto));
 
         //When & Then
@@ -86,15 +85,15 @@ class TaskControllerTestMvc {
                         MockMvcRequestBuilders
                                 .delete("/v1/tasks/{taskId}", 1L)
                                 .contentType(MediaType.APPLICATION_JSON))
-                        .andExpect(MockMvcResultMatchers.status().is(200));
+                .andExpect(MockMvcResultMatchers.status().is(200));
     }
 
     @Test
-    void updateTask() throws Exception{
+    void updateTask() throws Exception {
         //Given
         Gson gson = new Gson();
-        TaskDto taskDto = new TaskDto("title","content");
-        TaskDto updatedTaskDto = new TaskDto("new title","new content");
+        TaskDto taskDto = new TaskDto("title", "content");
+        TaskDto updatedTaskDto = new TaskDto("new title", "new content");
         when(taskController.updateTask(any(TaskDto.class))).thenReturn(ResponseEntity.ok().body(updatedTaskDto));
         String json = gson.toJson(taskDto);
         //When & Then
@@ -112,7 +111,7 @@ class TaskControllerTestMvc {
     @Test
     void createTask() throws Exception {
         //Given
-        TaskDto taskDto = new TaskDto("title","content");
+        TaskDto taskDto = new TaskDto("title", "content");
         Gson gson = new Gson();
         String json = gson.toJson(taskDto);
         //When & Then
