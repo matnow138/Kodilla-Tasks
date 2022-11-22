@@ -1,6 +1,8 @@
 package com.crud.tasks.controller;
 
+import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
+import com.google.gson.Gson;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
 
 @SpringJUnitWebConfig
 @WebMvcTest(TaskController.class)
@@ -43,26 +46,83 @@ class TaskControllerTestMvc {
     }
 
     @Test
-    void searchTask() {
+    void searchTask() throws Exception{
+        //Given
+        TaskDto taskDto = new TaskDto("title","content");
+        when(taskController.searchTask(anyLong())).thenReturn(ResponseEntity.ok().body(taskDto));
+
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .get("/v1/tasks/searchTask/{taskId}", 1L)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title", Matchers.is("title")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.is("content")));
+
+    }
+
+    @Test
+    void getTask() throws Exception{
+        //Given
+        TaskDto taskDto = new TaskDto("title","content");
+        when(taskController.getTask(anyLong())).thenReturn(ResponseEntity.ok().body(taskDto));
+
+        //When & Then
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .get("/v1/tasks/{taskId}", 1L)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title", Matchers.is("title")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.is("content")));
+    }
+
+    @Test
+    void deleteTask() throws Exception {
         //Given
 
         //When & Then
-
+        mockMvc
+                .perform(
+                        MockMvcRequestBuilders
+                                .delete("/v1/tasks/{taskId}", 1L)
+                                .contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(MockMvcResultMatchers.status().is(200));
     }
 
     @Test
-    void getTask() {
+    void updateTask() throws Exception{
+        //Given
+        Gson gson = new Gson();
+        TaskDto taskDto = new TaskDto("title","content");
+        TaskDto updatedTaskDto = new TaskDto("new title","new content");
+        when(taskController.updateTask(any(TaskDto.class))).thenReturn(ResponseEntity.ok().body(updatedTaskDto));
+        String json = gson.toJson(taskDto);
+        //When & Then
+        mockMvc
+                .perform(
+                        MockMvcRequestBuilders
+                                .put("/v1/tasks/")
+                                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                .characterEncoding("UTF-8")
+                                .content(json))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title", Matchers.is("new title")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content", Matchers.is("new content")));
     }
 
     @Test
-    void deleteTask() {
-    }
-
-    @Test
-    void updateTask() {
-    }
-
-    @Test
-    void createTask() {
+    void createTask() throws Exception {
+        //Given
+        TaskDto taskDto = new TaskDto("title","content");
+        Gson gson = new Gson();
+        String json = gson.toJson(taskDto);
+        //When & Then
+        mockMvc
+                .perform(
+                        MockMvcRequestBuilders
+                                .post("/v1/tasks")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .characterEncoding("UTF-8")
+                                .content(json))
+                .andExpect(MockMvcResultMatchers.status().is(200));
     }
 }
