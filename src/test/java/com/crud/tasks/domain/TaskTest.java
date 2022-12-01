@@ -1,4 +1,4 @@
-package com.crud.tasks.domain;
+/* package com.crud.tasks.domain;
 
 import com.crud.tasks.service.DbService;
 import org.junit.jupiter.api.Test;
@@ -24,3 +24,5 @@ public class TaskTest {
         assertEquals(task.getContent(),"test content");
     }
 }
+
+ */
