@@ -6,7 +6,9 @@ import com.crud.tasks.domain.Mail;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.trello.client.TrelloClient;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Data
-@Service
 @RequiredArgsConstructor
 public class TrelloService {
     private static final String SUBJECT = "Tasks: New Trello card";
