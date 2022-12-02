@@ -18,6 +18,7 @@ import java.util.Optional;
 
 @Data
 @RequiredArgsConstructor
+@Service
 public class TrelloService {
     private static final String SUBJECT = "Tasks: New Trello card";
     private final TrelloClient trelloClient;
