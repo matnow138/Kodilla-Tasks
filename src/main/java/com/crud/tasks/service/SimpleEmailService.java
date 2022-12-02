@@ -20,7 +20,7 @@ import java.util.Optional;
 @Service
 public class SimpleEmailService {
 
-    @Autowired
+
     private final JavaMailSender javaMailSender;
 
     public void send(final Mail mail) {
