@@ -20,7 +20,7 @@ import java.util.Optional;
 public class TrelloService {
     private static final String SUBJECT = "Tasks: New Trello card";
     private final TrelloClient trelloClient;
-    private final SimpleEmailService emailService;
+   // private final SimpleEmailService emailService;
     private final AdminConfig adminConfig;
     public List<TrelloBoardDto> fetchTrelloBoards(){
         return trelloClient.getTrelloBoards();
@@ -28,13 +28,13 @@ public class TrelloService {
 
     public CreatedTrelloCardDto createTrelloCard(final TrelloCardDto trelloCardDto){
         CreatedTrelloCardDto newCard = trelloClient.createNewCard(trelloCardDto);
-        Optional.ofNullable(newCard).ifPresent(card -> emailService.send(new Mail(
+       /* Optional.ofNullable(newCard).ifPresent(card -> emailService.send(new Mail(
                 adminConfig.getAdminMail(),
                 SUBJECT,
                 "new card: " + trelloCardDto.getName() + " has been created on your Trello account",
                 null
 
-        )));
+        )));*/
 
         return newCard;
     }
