@@ -16,6 +16,7 @@ import java.util.Optional;
 @Slf4j
 @Data
 @RequiredArgsConstructor
+@Service
 public class SimpleEmailService {
 
     private final JavaMailSender javaMailSender;
