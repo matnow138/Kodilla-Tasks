@@ -22,6 +22,7 @@ import static java.util.stream.Collectors.toList;
 
 @RequiredArgsConstructor
 @Data
+@Component
 public class TrelloFacade {
     private static final Logger LOGGER = LoggerFactory.getLogger(TrelloFacade.class);
 
