@@ -4,6 +4,9 @@ import com.crud.tasks.domain.*;
 import com.crud.tasks.mapper.TrelloMapper;
 import com.crud.tasks.service.TrelloService;
 import com.crud.tasks.trello.validator.TrelloValidator;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +19,9 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
 
 
-@Component
+
 @RequiredArgsConstructor
+@Data
 public class TrelloFacade {
     private static final Logger LOGGER = LoggerFactory.getLogger(TrelloFacade.class);
 
