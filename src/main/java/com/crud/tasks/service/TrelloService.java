@@ -20,7 +20,7 @@ import java.util.Optional;
 public class TrelloService {
     private static final String SUBJECT = "Tasks: New Trello card";
     private final TrelloClient trelloClient;
-   // private final SimpleEmailService emailService;
+    private final SimpleEmailService emailService;
     private final AdminConfig adminConfig;
     public List<TrelloBoardDto> fetchTrelloBoards(){
         return trelloClient.getTrelloBoards();

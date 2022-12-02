@@ -1,10 +1,11 @@
-/*package com.crud.tasks.service;
+package com.crud.tasks.service;
 
 
 import com.crud.tasks.domain.Mail;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -41,4 +42,4 @@ public class SimpleEmailService {
     }
 
 
-}*/
+}
