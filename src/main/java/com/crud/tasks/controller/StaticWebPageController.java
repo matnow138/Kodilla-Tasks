@@ -1,5 +1,6 @@
 package com.crud.tasks.controller;
 
+import com.crud.tasks.service.MailCreatorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,5 +16,7 @@ public class StaticWebPageController {
         model.put("two", 2);
         return "index";
     }
+
+
 
 }
